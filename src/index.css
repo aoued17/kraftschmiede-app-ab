@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Cairo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  
+  .font-mono-numbers {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom scrollbar for desktop app feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ==========================================================================
+   A4 PRINT STYLESHEET
+   Full-page vertical A4 expansion with 100% width and height coverage
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 8mm 10mm;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    line-height: 1.25 !important;
+    direction: ltr !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #printable-document, #printable-document * {
+    visibility: visible !important;
+  }
+
+  /* Main Document Container - Fills the exact printable A4 portrait sheet (275mm - 278mm) */
+  #printable-document {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 275mm !important;
+    min-height: 275mm !important;
+    max-height: 278mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-inside: avoid !important;
+    overflow: hidden !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  tr, td, th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

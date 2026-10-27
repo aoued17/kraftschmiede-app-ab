@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>KraftSchmiede Auto - ورشة صيانة السيارات</title>
+    <meta name="description" content="نظام مكتبي متكامل لإدارة ورشة صيانة السيارات KraftSchmiede: أوامر الشغل، التشخيص، الفواتير الرسمية A4، المخزون، وحسابات الڨراج وتسبيقات ويوميات العمال." />
+    
+    <!-- PWA & Mobile Web App Meta Tags -->
+    <meta name="theme-color" content="#1e293b" />
+    <meta name="background-color" content="#0f172a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KraftSchmiede" />
+    <meta name="application-name" content="KraftSchmiede" />
+    <meta name="msapplication-TileColor" content="#1e293b" />
+    <meta name="msapplication-navbutton-color" content="#1e293b" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Icons & Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="alternate icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Social & OpenGraph Cards -->
+    <meta property="og:title" content="KraftSchmiede Auto - ورشة صيانة السيارات" />
+    <meta property="og:description" content="نظام مكتبي متكامل لإدارة ورشة صيانة السيارات KraftSchmiede: أوامر الشغل، التشخيص، الفواتير الرسمية A4، المخزون، وحسابات الڨراج وتسبيقات ويوميات العمال." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/pwa-512x512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="KraftSchmiede Auto" />
+    <meta name="twitter:description" content="نظام مكتبي متكامل لإدارة ورشة صيانة السيارات KraftSchmiede" />
+    <meta name="twitter:image" content="/pwa-512x512.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-900 text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+            .then((registration) => {
+              console.log('[PWA] Service Worker registered successfully with scope:', registration.scope);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      console.log('[PWA] New version available! Reloading or ready to update.');
+                    }
+                  });
+                }
+              });
+            })
+            .catch((error) => {
+              console.error('[PWA] Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
